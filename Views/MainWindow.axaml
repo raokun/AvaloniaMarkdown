@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaMarkdown.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaMarkdown.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+		xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaMarkdown">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="10*"/>
+			<ColumnDefinition Width="10*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*"/>
+			<RowDefinition Height="10*"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0"
+            Grid.Column="0" Grid.ColumnSpan="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="9*"/>
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Classes="small" Margin="0,0,20,0" Command="{Binding UploadCommand}">打开</Button>
+				<Button Classes="small" Margin="0,0,20,0" Command="{Binding SaveCommand}">保存</Button>
+				<Label Content="{Binding FilePath}" Margin="0,0,20,0"/>
+			</StackPanel>
+		</Grid>
+		<TextBox Grid.Row="1"
+            Grid.Column="0"
+          VerticalAlignment="Stretch"
+          AcceptsReturn="True"
+          Text="{Binding Text}"
+          TextWrapping="Wrap"
+          />
+		<md:MarkdownScrollViewer Grid.Row="1"
+            Grid.Column="1" Name="abc" Markdown="{Binding Text}"/>
+	</Grid>
+	
+    
+</Window>
